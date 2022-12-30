@@ -5,7 +5,13 @@ import { blogsData } from './data';
 const Blogs = () => {
     const [data, setData] = useState(blogsData);
 
-    console.log(data);
+    const trunkString = (str, num) => {
+        if (str.length > num) {
+            return str.slice(0, num) + '...'
+        } else {
+            return str;
+        }
+    }
     return (
         <div>
             <h1>Blogs Page</h1>
@@ -15,8 +21,8 @@ const Blogs = () => {
                         const {id , title, body} = blog
                         return <article key= {id}>
                             <h2>{title}</h2>
-                            <p>{body}</p>
-                            <Link to={title}>Learn More</Link>
+                            <p>{trunkString(body, 100)}</p>
+                            <Link to={title} state={{ id, title, body }}>Learn More</Link>
                         </article>
                     })
                 }
